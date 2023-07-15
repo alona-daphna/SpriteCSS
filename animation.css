@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  --pixel-factor: 4;
+  --pixels: 32px;
+  --spriteStates: 4;
+}
+
+* {
+  font-family: "Rubik";
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: #03000a;
+}
+
+#playground {
+  background-color: #000043;
+  background-image: radial-gradient(
+      at 47% 33%,
+      hsl(236.95, 100%, 23%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 65%, hsl(247.86, 78%, 19%) 0, transparent 55%);
+  aspect-ratio: 1 / 1;
+  max-width: 600px;
+  min-width: 300px;
+  margin: 120px auto;
+  border: 1px solid rgba(48, 47, 47, 0.5);
+  border-radius: 1.5rem;
+  box-shadow: 0px 0px 1px rgb(167, 172, 253);
+  background-color: rgba(48, 47, 47, 0.2);
+}
+
+@media (max-width: 700px) {
+  #playground {
+    width: 80%;
+    position: relative;
+  }
+}
+
+.add-sprite {
+  width: fit-content;
+  margin: auto;
+}
+
+#add-sprite-button {
+  user-select: none;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  background: inherit;
+  color: #fff;
+  filter: drop-shadow(0px 0px 8px #3b48f5);
+}
+
+#add-sprite-button:hover {
+  background: #3b48f5;
+}
+
+.sprite {
+  position: absolute;
+  filter: drop-shadow(0px 10px 6px rgba(239, 182, 250, 0.5));
+  width: calc(var(--pixels) * var(--pixel-factor));
+  height: calc(var(--pixels) * var(--pixel-factor));
+  margin: auto;
+  position: absolute;
+
+  /* hide the image */
+  overflow: hidden;
+}
+
+.sprite-img {
+  user-select: none;
+  -webkit-user-drag: none;
+
+  /* increase the image and make it look sharp */
+  width: calc(var(--pixels) * var(--spriteStates) * var(--pixel-factor));
+  image-rendering: pixelated;
+
+  /* move image to the left to change between the sprite's state quickly 
+  and make it look animated */
+  animation: stepCharacter 0.5s steps(4) infinite;
+}
+
+@keyframes stepCharacter {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
