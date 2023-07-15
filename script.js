@@ -21,6 +21,7 @@ const createSprite = () => {
     // create the trajectory keyframe for the sprite
     let coors = createRandomCoor();
 
+    console.log(coors)
     let childIndex = playground.children.length;
     let framePercent = 100 / pathCount;
     let keyframe = `@keyframes moveSprite${childIndex} {`;
@@ -31,15 +32,17 @@ const createSprite = () => {
             left: ${coors[i][0]}px;
             top: ${coors[i][1]}px;
         }`);
-      } else {
+      } else if (i < coors.length) {
+        console.log(i)
         keyframe = keyframe.concat(`${framePercent * i + 1}% {
-            left: ${coors[i - 1][0]}px;
-            top: ${coors[i - 1][1]}px;
+            left: ${coors[i][0]}px;
+            top: ${coors[i][1]}px;
         }`);
       }
     }
 
     keyframe = keyframe.concat("}");
+    console.log(keyframe);
 
     // add the keyframe to the stylesheet
     if (!dynamicStyles) {
